@@ -16,7 +16,7 @@ import pl.droidsonroids.gif.GifImageView;
 
 public class GifActivity extends AppCompatActivity {
     private static final String TAG = "GifActivity";
-    private static int TIME_OUT = 3000;
+    private static int TIME_OUT = 1000;
     GifImageView gifImageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

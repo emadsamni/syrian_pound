@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         progressDialog =ProgressDialog.getInstance();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+
         coinList= new ArrayList<Coin>();
         goldList=new ArrayList<gold>();
         mPrefs = getSharedPreferences("myPrefs",MODE_PRIVATE);
