@@ -29,8 +29,8 @@ public class GifActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent i = new Intent(GifActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
+              //  startActivity(i);
+              //  finish();
             }
         }, TIME_OUT);
 
