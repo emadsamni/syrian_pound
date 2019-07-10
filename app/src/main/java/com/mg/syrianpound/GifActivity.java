@@ -5,7 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Base64;
 
 import java.security.MessageDigest;
@@ -29,8 +29,8 @@ public class GifActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent i = new Intent(GifActivity.this, MainActivity.class);
-              //  startActivity(i);
-              //  finish();
+                startActivity(i);
+                finish();
             }
         }, TIME_OUT);
 

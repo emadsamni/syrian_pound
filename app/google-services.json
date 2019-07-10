@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1096529248021:android:26f54507c3b2dbe1",
         "android_client_info": {
-          "package_name": "com.example.syrianpound"
+          "package_name": "com.mg.syrianpound"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1096529248021-61b0gcus8hgi6bh3bnuedp7cj3t9qbv0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.syrianpound",
+            "package_name": "com.mg.syrianpound",
             "certificate_hash": "88cb08e0533d49b6a7987684788cbbf6d75e97fc"
           }
         },
