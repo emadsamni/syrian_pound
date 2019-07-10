@@ -47,82 +47,81 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:weightSum="4">
-
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-           >
-            <Spinner
-
-                android:id="@+id/fromspid"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:spinnerMode="dialog"
-                android:background="@drawable/spinner_back"
-
-               >
-            </Spinner>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center"
-            >
+            android:background="@drawable/filter_reduis"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <Button
+                android:background="@drawable/border_raduis"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textSize="6pt"
+                android:text="@string/browse"
+                android:id="@+id/from_button"
+                android:textColor="@color/white"/>
             <TextView
-                android:id="@+id/fromCoin"
-                android:layout_width="wrap_content"
+                android:id="@+id/from_text"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"/>
+                android:layout_weight="2"
+                android:textDirection="rtl"
+                android:text="@string/from"
+                android:textSize="8pt"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
         </LinearLayout>
     </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="4"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-      >
-
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-            <Spinner
-                android:id="@+id/tospid"
-                android:layout_width="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:weightSum="4">
+            <LinearLayout
+                android:background="@drawable/filter_reduis"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:spinnerMode="dialog"
-                android:background="@drawable/spinner_back"
-                >
-            </Spinner>
+                android:layout_weight="2"
+                android:weightSum="3"
+                android:orientation="horizontal">
+                <Button
+                    android:background="@drawable/border_raduis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textSize="6pt"
+                    android:text="@string/browse"
+                    android:id="@+id/to_button"
+                    android:textColor="@color/white"/>
+                <TextView
+                    android:id="@+id/to_text"
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textDirection="rtl"
+                    android:text="@string/to"
+                    android:textSize="8pt"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center"
-            >
-            <TextView
-                android:id="@+id/toCoin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                />
-        </LinearLayout>
-    </LinearLayout>
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

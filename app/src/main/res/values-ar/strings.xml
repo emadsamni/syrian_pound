@@ -16,6 +16,11 @@
     <string name="ReConnect">إعادة الاتصال مجددا</string>
     <string name="inputEmpty">الرجاء تعبئة جميع الحقول</string>
     <string name="inputQuantity">كمية العملة</string>
+    <string name="browse">اختيار عملة</string>
+    <string name="sp">الليرة السورية</string>
+    <string name="cancel">الغاء</string>
+    <string name="select">تعيين</string>
+    <string name="select_coins">اختيار عملة : </string>
 
 
 

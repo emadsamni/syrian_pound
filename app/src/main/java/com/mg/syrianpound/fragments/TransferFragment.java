@@ -1,5 +1,7 @@
 package com.mg.syrianpound.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -34,26 +37,26 @@ import java.util.List;
 import java.util.Locale;
 
 public class TransferFragment  extends Fragment {
-    Spinner fromSpinner , toSpinner;
-    ArrayAdapter<String> fromAdapter;
-    ArrayAdapter<String> toAadapter;
     List<Coin> coinList;
-    List <String> fromlist;
-    List <String> tolist;
     TextView fromCoin , toCoin ,sellRes ,buyRes;
     EditText input;
     int from ,to ;
     ImageView imageView;
     Animation animation;
+    int type=0;
+    TextView toText,fromText;
+    Button toButton ,fromButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.transfer_fragment, null);
-        fromSpinner = (Spinner) view.findViewById(R.id.fromspid);
-        toSpinner = (Spinner) view.findViewById(R.id.tospid);
         imageView = (ImageView) view.findViewById(R.id.convert_button);
         input =(EditText)view.findViewById(R.id.button_input) ;
         sellRes = (TextView) view.findViewById(R.id.sellRes);
         buyRes = (TextView) view.findViewById(R.id.BuyRes);
+        toText = (TextView) view.findViewById(R.id.to_text);
+        fromText = (TextView) view.findViewById(R.id.from_text);
+        toButton = (Button) view.findViewById(R.id.to_button);
+        fromButton = (Button) view.findViewById(R.id.from_button);
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -71,127 +74,113 @@ public class TransferFragment  extends Fragment {
             }
         });
         coinList= ((MainActivity)getActivity()).getCoinList();
-        fromlist = new ArrayList<>();
-        tolist = new ArrayList<>();
-        fromCoin = view.findViewById(R.id.fromCoin);
-        toCoin = view.findViewById(R.id.toCoin);
         initFacebookLogin(view);
+        from =-1;
+        to = -1;
 
-        fromlist.add(getActivity().getResources().getString(R.string.from));
-        fromlist.add("الليرة السورية");
-        tolist.add( getActivity().getResources().getString(R.string.to));
-        tolist.add("الليرة السورية");
+        setFromButton(coinList);
+        setToButton(coinList);
 
-        for (int i=0;i<coinList.size();i++)
-        {
-            fromlist.add(coinList.get(i).getCoin_name());
-        }
-        for (int i=0;i<coinList.size();i++)
-        {
-            tolist.add(coinList.get(i).getCoin_name());
-        }
-        from =0;
-        to = 0;
-
-        fromAdapter = new ArrayAdapter<String>(getActivity(), R.layout.layout_spinner ,fromlist) {
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView tv = (TextView) super.getView(position, convertView, parent);
-                tv.setTextColor(getResources().getColor(R.color.black));
-
-                return tv;
-            }
-            @Override
-            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
-                View view;
-                if (position == 0) {
-                    TextView selectView = new TextView(getContext());
-                    selectView.setHeight(0);
-                    selectView.setVisibility(View.GONE);
-                    view = selectView;
-                } else
-                    view = super.getDropDownView(position, null, parent);
-
-                return view;
-            }
-        };
-        toAadapter = new ArrayAdapter<String>(getActivity(), R.layout.layout_spinner ,tolist) {
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView tv = (TextView) super.getView(position, convertView, parent);
-                tv.setTextColor(getResources().getColor(R.color.black));
-
-                return tv;
-            }
-
-            @Override
-            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
-                View view;
-                if (position == 0) {
-                    TextView selectView = new TextView(getContext());
-                    selectView.setHeight(0);
-                    selectView.setVisibility(View.GONE);
-                    view = selectView;
-                } else
-                    view = super.getDropDownView(position, null, parent);
-
-                return view;
-            }
-        };
-        fromSpinner.setAdapter(fromAdapter);
-        toSpinner.setAdapter(toAadapter);
-        fromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (fromSpinner.getSelectedItemPosition() != 0) {
-                    from = fromSpinner.getSelectedItemPosition();
-                    fromCoin.setText(fromSpinner.getSelectedItem().toString());
-                    //fromSpinner.setSelection(0);
-                    fromSpinner.setAdapter(fromAdapter);
-                }
-
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (toSpinner.getSelectedItemPosition() != 0) {
-                    to = toSpinner.getSelectedItemPosition();
-                    toCoin.setText(toSpinner.getSelectedItem().toString());
-                    toSpinner.setSelection(0);
-                }
-
-
-                //  cal();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         return view;
     }
 
+
+    public  void  setFromButton(List<Coin> coinList)
+    {
+        String[] coins = new String[coinList.size()+1];
+        coins[0] =getResources().getString(R.string.sp);
+        for (int i=0;i<coinList.size();i++)
+        {
+            coins[i+1] =coinList.get(i).getCoin_name();
+        }
+        fromButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                from =0;
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                adb.setSingleChoiceItems(coins, 0, new DialogInterface.OnClickListener() {
+
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        from = which;
+                    }
+
+                });
+                adb.setNegativeButton(getActivity().getResources().getString(R.string.cancel), null);
+
+                adb.setPositiveButton(getActivity().getResources().getString(R.string.select), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (from != 0) {
+                            fromText.setText(coinList.get(from-1).getCoin_name());
+
+                        }
+                        else {
+                            fromText.setText(getActivity().getResources().getString(R.string.sp));
+                        }
+
+                    }
+                });
+                adb.setTitle(getActivity().getResources().getString(R.string.select_coins));
+                adb.show();
+            }
+        });
+    }
+    public  void  setToButton(List<Coin> coinList)
+    {
+        String[] coins = new String[coinList.size()+1];
+        coins[0] =getResources().getString(R.string.sp);
+        for (int i=0;i<coinList.size();i++)
+        {
+            coins[i+1] =coinList.get(i).getCoin_name();
+        }
+        toButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                to =0;
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                adb.setSingleChoiceItems(coins, 0, new DialogInterface.OnClickListener() {
+
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        to = which;
+                    }
+
+                });
+                adb.setNegativeButton(getActivity().getResources().getString(R.string.cancel), null);
+
+                adb.setPositiveButton(getActivity().getResources().getString(R.string.select), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (to != 0) {
+                            toText.setText(coinList.get(to-1).getCoin_name());
+
+                        }
+                        else {
+                            toText.setText(getActivity().getResources().getString(R.string.sp));
+                        }
+
+                    }
+                });
+                adb.setTitle(getActivity().getResources().getString(R.string.select_coins));
+                adb.show();
+            }
+        });
+    }
     private boolean isInputValidation() {
         boolean check = true;
         String message="";
         if (input.getText().toString().isEmpty()){
             check =false;
         }
-        if (fromCoin.getText().toString().isEmpty()){
+        if (from==-1){
 
             check =false;
         }
-        if (toCoin.getText().toString().isEmpty()){
+        if (to==-1){
 
             check =false;
         }
@@ -211,11 +200,11 @@ public class TransferFragment  extends Fragment {
            int tempTO;
            tempFrom = from;
            tempTO =to;
-           from--;
-           to --;
+
                if (from == 0) {
                    if (to == 0) {
                        res = x;
+                       res2 =x;
                    } else {
                        res = x / coinList.get(to - 1).getLog().get(0).getBuy();
                        res2 = x / coinList.get(to - 1).getLog().get(0).getSell();

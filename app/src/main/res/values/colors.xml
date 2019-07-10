@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#bc9136</color>
     <color name="colorPrimaryDark">#030303</color>
-    <color name="colorSecondary">#D4005A</color>
+    <color name="colorSecondary">#f2d25d</color>
     <color name="colorAccent">#06C1F2</color>
     <color name="dark">#3e524b</color>
     <color name="white">#FFFFFF</color>
@@ -15,5 +15,6 @@
     <color name="nav_back">#38465A</color>
     <color name="primary_transparent">#1B2A42</color>
     <color name="yallow">#bc9136</color>
+
 
 </resources>
