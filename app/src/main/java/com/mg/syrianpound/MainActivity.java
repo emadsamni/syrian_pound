@@ -4,6 +4,9 @@ import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,9 +60,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     SharedPreferences  mPrefs;
     Dialog reConnectDialog;
     Button reConnect;
-    InterstitialAd mInterstitialAd;
-    private InterstitialAd interstitial;
-    RewardedVideoAd mAd;
+    PublisherInterstitialAd mInterstitialAd;
+//    private InterstitialAd interstitial;
+//    RewardedVideoAd mAd;
 
 
     @Override
@@ -78,12 +81,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         progressDialog.show(this);
 
         AdRequest adRequest = new AdRequest.Builder().build();
-
         MobileAds.initialize(this ,"ca-app-pub-9346728385477859~9335744094");
-        mAd=MobileAds.getRewardedVideoAdInstance(this);
-        mAd.setRewardedVideoAdListener(this);
-        mAd.loadAd("ca-app-pub-9346728385477859/3700274039",
-                new AdRequest.Builder().build());
+
+        mInterstitialAd = new PublisherInterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-9346728385477859/2855704457");
+        mInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+
+//        mAd=MobileAds.getRewardedVideoAdInstance(this);
+//        mAd.setRewardedVideoAdListener(this);
+//        mAd.loadAd("ca-app-pub-9346728385477859/3700274039",
+//                new AdRequest.Builder().build());
 
         getData();
         AdView mAdView = (AdView) findViewById(R.id.adView);
@@ -170,8 +177,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
     private  boolean loadFragment(Fragment fragment)
     {
-        if (mAd.isLoaded())
-            mAd.show();
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
+//        if (mAd.isLoaded())
+//            mAd.show();
         if (fragment  != null )
         {
             getSupportFragmentManager()
@@ -256,9 +266,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
     public void displayInterstitial() {
 // If Ads are loaded, show Interstitial else show nothing.
-        if (interstitial.isLoaded()) {
-            interstitial.show();
-        }
+//        if (interstitial.isLoaded()) {
+//            interstitial.show();
+//        }
     }
 
     @Override
