@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,6 +34,8 @@ public class GifActivity extends AppCompatActivity {
                 finish();
             }
         }, TIME_OUT);
+
+        Log.d("hhhh", getKeyHash());
 
     }
 
